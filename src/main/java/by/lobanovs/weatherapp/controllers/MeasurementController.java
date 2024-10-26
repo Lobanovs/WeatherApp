@@ -19,6 +19,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurements")
@@ -31,6 +32,15 @@ public class MeasurementController {
     public MeasurementController(MeasurementService measurementService, ModelMapper modelMapper) {
         this.measurementService = measurementService;
         this.modelMapper = modelMapper;
+    }
+
+
+    @GetMapping
+    public List<MeasurementDTO> getMeasurements() {
+        return measurementService.findAll()
+                .stream()
+                .map(this::convertToMeasurementDTO)
+                .collect(Collectors.toList());
     }
 
 
@@ -77,6 +87,11 @@ public class MeasurementController {
 
         measurement.setSensor(sensor);
         return measurement;
+    }
+
+    private MeasurementDTO convertToMeasurementDTO(Measurement measurement) {
+        MeasurementDTO measurementDTO = modelMapper.map(measurement, MeasurementDTO.class);
+        return measurementDTO;
     }
 
 }

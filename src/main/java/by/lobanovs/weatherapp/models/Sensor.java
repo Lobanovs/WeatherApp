@@ -1,6 +1,7 @@
 package by.lobanovs.weatherapp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,6 +23,7 @@ public class Sensor {
     private String name;
 
     @OneToMany(mappedBy = "sensor")
+    @JsonIgnore
     private List<Measurement> measurements;
 
 
