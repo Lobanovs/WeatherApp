@@ -2,7 +2,7 @@ package by.lobanovs.weatherapp.services;
 
 import by.lobanovs.weatherapp.models.Sensor;
 import by.lobanovs.weatherapp.repositories.SensorRepository;
-import by.lobanovs.weatherapp.util.SensorNotCreatedException;
+import by.lobanovs.weatherapp.util.Sensor.SensorNotCreatedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,7 @@ public class SensorService {
         if (sensorRepository.existsByName(sensor.getName())) {
             throw new SensorNotCreatedException("Сенсор с именем '" + sensor.getName() + "' уже существует.");
         }
+
 
         sensorRepository.save(sensor);
     }

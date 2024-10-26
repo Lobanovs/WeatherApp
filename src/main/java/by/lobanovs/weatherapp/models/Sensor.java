@@ -2,6 +2,8 @@ package by.lobanovs.weatherapp.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -15,10 +17,12 @@ public class Sensor {
     private int id;
 
     @Column(name="name")
+    @NotBlank(message = "имя сенсора не должно быть пустым")
+    @Size(min=3, max = 30, message = "Имя сенсора должно быть от 3 до 30 символов")
     private String name;
 
     @OneToMany(mappedBy = "sensor")
-    private List<Measurements> measurements;
+    private List<Measurement> measurements;
 
 
     public Sensor() {
@@ -44,11 +48,11 @@ public class Sensor {
         this.name = name;
     }
 
-    public List<Measurements> getMeasurements() {
+    public List<Measurement> getMeasurements() {
         return measurements;
     }
 
-    public void setMeasurements(List<Measurements> measurements) {
+    public void setMeasurements(List<Measurement> measurements) {
         this.measurements = measurements;
     }
 }

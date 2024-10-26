@@ -4,8 +4,8 @@ package by.lobanovs.weatherapp.controllers;
 import by.lobanovs.weatherapp.dto.SensorDTO;
 import by.lobanovs.weatherapp.models.Sensor;
 import by.lobanovs.weatherapp.services.SensorService;
-import by.lobanovs.weatherapp.util.SensorErrorResponse;
-import by.lobanovs.weatherapp.util.SensorNotCreatedException;
+import by.lobanovs.weatherapp.util.Sensor.SensorErrorResponse;
+import by.lobanovs.weatherapp.util.Sensor.SensorNotCreatedException;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,10 @@ public class SensorController {
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> createSensor(@RequestBody @Valid SensorDTO sensorDTO,
                                                    BindingResult bindingResult){
+
+
+
+        sensorDTO.setName(sensorDTO.getName().trim());
 
         if (bindingResult.hasErrors()) {
             StringBuilder errors = new StringBuilder();
@@ -73,4 +77,6 @@ public class SensorController {
         // В HTTP ответе тело ответа и статус в заголовке
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 400 status
     }
+
+
 }

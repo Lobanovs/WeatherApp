@@ -1,10 +1,10 @@
-package by.lobanovs.weatherapp.util;
+package by.lobanovs.weatherapp.util.Measurement;
 
-public class SensorErrorResponse {
+public class MeasurementErrorResponse {
 
     private String message;
 
-    public SensorErrorResponse(String message) {
+    public MeasurementErrorResponse(String message) {
         this.message = message;
     }
 
