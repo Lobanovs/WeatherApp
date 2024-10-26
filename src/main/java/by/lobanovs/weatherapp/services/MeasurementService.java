@@ -20,6 +20,7 @@ public class MeasurementService {
     private final MeasurementRepository measurementRepository;
     private final SensorRepository sensorRepository;
 
+
     @Autowired
     public MeasurementService(MeasurementRepository measurementRepository, SensorRepository sensorRepository) {
         this.measurementRepository = measurementRepository;

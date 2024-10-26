@@ -4,11 +4,11 @@ package by.lobanovs.weatherapp.controllers;
 import by.lobanovs.weatherapp.dto.MeasurementDTO;
 import by.lobanovs.weatherapp.models.Measurement;
 import by.lobanovs.weatherapp.models.Sensor;
+import by.lobanovs.weatherapp.senderAndClient.MeasurementClient;
+import by.lobanovs.weatherapp.senderAndClient.MeasurementSender;
 import by.lobanovs.weatherapp.services.MeasurementService;
 import by.lobanovs.weatherapp.util.Measurement.MeasurementErrorResponse;
 import by.lobanovs.weatherapp.util.Measurement.MeasurementNotCreatedException;
-import by.lobanovs.weatherapp.util.Sensor.SensorErrorResponse;
-import by.lobanovs.weatherapp.util.Sensor.SensorNotCreatedException;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +27,23 @@ public class MeasurementController {
 
     private final MeasurementService measurementService;
     private final ModelMapper modelMapper;
+    private final MeasurementSender measurementSender;
+    private final MeasurementClient measurementClient;
+
 
     @Autowired
-    public MeasurementController(MeasurementService measurementService, ModelMapper modelMapper) {
+    public MeasurementController(MeasurementService measurementService, ModelMapper modelMapper, MeasurementSender measurementSender, MeasurementClient measurementClient) {
         this.measurementService = measurementService;
         this.modelMapper = modelMapper;
+        this.measurementSender = measurementSender;
+        this.measurementClient = measurementClient;
     }
 
+    @PostMapping("/sendMeasurements")
+    public String sendMeasurements() {
+        measurementSender.sendMeasurements();
+        return "Measurements sent!";
+    }
 
     @GetMapping("/rainyDaysCount")
     public ResponseEntity<Long> getRainyDaysCount() {
@@ -41,6 +51,10 @@ public class MeasurementController {
         return ResponseEntity.ok(rainyDaysCount);
     }
 
+    @GetMapping("/getAllMeasurements")
+    public List<MeasurementDTO> fetchAllMeasurements() {
+        return measurementClient.getMeasurements();
+    }
 
     @GetMapping
     public List<MeasurementDTO> getMeasurements() {
