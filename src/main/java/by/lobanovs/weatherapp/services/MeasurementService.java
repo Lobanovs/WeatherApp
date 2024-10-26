@@ -46,4 +46,9 @@ public class MeasurementService {
                 .orElseThrow(() -> new SensorNotFoundException("Сенсор не найден"));
     }
 
+    public Long getRainyDaysCount() {
+        return measurementRepository.countRainyDays();
+    }
+
+
 }
