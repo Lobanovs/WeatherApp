@@ -37,7 +37,7 @@ public class MeasurementSender {
             // Генерация случайного значения для дождя
             boolean raining = random.nextBoolean();
 
-            String sensorName = "Sib"; // Название сенсора, которое вы хотите использовать
+            String sensorName = "1"; // Название сенсора, которое вы хотите использовать
             Sensor existingSensor = measurementService.findSensorByName(sensorName);
 
             // Создание JSON-объекта для отправки
@@ -61,11 +61,11 @@ public class MeasurementSender {
         Random random = new Random();
 
         // Генерация случайной температуры в диапазоне от -100 до 100
-        double temperature = -100 + (200 * random.nextDouble());
+        double temperature = -1 + (2 * random.nextDouble());
         // Генерация случайного значения для дождя
         boolean raining = random.nextBoolean();
 
-        String sensorName = "first"; // Название сенсора
+        String sensorName = "1"; // Название сенсора
         Sensor existingSensor = measurementService.findSensorByName(sensorName);
 
         // Создание JSON-объекта для отправки

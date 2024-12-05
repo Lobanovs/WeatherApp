@@ -77,6 +77,4 @@ public class SensorController {
         // В HTTP ответе тело ответа и статус в заголовке
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST); // 400 status
     }
-
-
 }

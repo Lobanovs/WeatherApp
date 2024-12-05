@@ -5,7 +5,6 @@ import by.lobanovs.weatherapp.models.Measurement;
 import by.lobanovs.weatherapp.models.Sensor;
 import by.lobanovs.weatherapp.repositories.MeasurementRepository;
 import by.lobanovs.weatherapp.repositories.SensorRepository;
-import by.lobanovs.weatherapp.util.Measurement.MeasurementNotCreatedException;
 import by.lobanovs.weatherapp.util.Sensor.SensorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +49,4 @@ public class MeasurementService {
     public Long getRainyDaysCount() {
         return measurementRepository.countRainyDays();
     }
-
-
 }
